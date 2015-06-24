@@ -1,0 +1,18 @@
+{
+  "name": "ghostBuster",
+  "version": "1.0.0",
+  "authors": [
+    "Rui Molefas <molefas@gmail.com>"
+  ],
+  "description": "Search plugin for ghost",
+  "keywords": [
+    "ghost",
+    "blog",
+    "search"
+  ],
+  "license": "MIT",
+  "homepage": "blog.cloudoki.com",
+  "dependencies": {
+    "lunr.js": "~0.5.10"
+  }
+}
