@@ -8,12 +8,18 @@ This plugin was inspired in [ghostHunter](), although, it has additioanl feature
 This plugins allows you to add search boxes wherever you may need them, and perform localized searches (ie: on the actual page); Or redirect all those search results to a global search page. This search page can also be accessed, for your convenience, by `/search/?query`
 
 ## Usage
-First of all, after including jQuery, include lunr and after that, ghostBuster.
+First of all go to default.hbs and after including jQuery, include lunr and after that, ghostBuster.
 Initialize the plugin like so:
 
-```js
+```html
 <script src="{{asset "js/lunr.min.js"}}"></script>
 <script src="{{asset "js/ghostBuster.js"}}"></script>
+```
+
+You can/should also add our/your CSS file on the same file, like so
+
+```html
+<link rel="stylesheet" type="text/css" href="{{asset "css/ghostBuster.min.css"}}" />
 ```
 
 Next, realize that there are two types of input fields one can generate. One will make an actual search and display the results in some div of your chosing; The other one is an input that will be connected to a static search page, that will preform the actual search.
@@ -53,18 +59,18 @@ Then add an input field and a results area on it, like so:
 
 ```html
 <form style="text-align:center">
-    <input id="search-field" />
-    <input type="submit" value="search">
+    <input id="search-field" class="ghost-search"/>
+    <input class="ghost-bust" type="submit" value="search">
 </form>
-<section id="results" style="text-align:center"></section>
+<section id="results"></section>
 ```
 
 Add extra input fields wherever you want, all with the same class, like so:
 
 ```html
 <form style="text-align:center">
-    <input class="search-redirect" />
-    <input type="submit" value="search">
+    <input class="search-redirect ghost-search"/>
+    <input type="submit" class="ghost-bust" value="search">
 </form>
 ```
 
@@ -89,3 +95,16 @@ You can also share search results since the search page is triggered through an 
 ```
 ../search/?query
 ```
+
+## How to customize & build
+We encourage you to fork or create your own themes & ghostBuster implementation. For that, we hooked this up with Grunt.
+Available tasks:
+
+#### grunt
+It will run the watch task and run jshint tests one every change you make;
+
+#### grunt clean:release
+It will clean the dist/ folder
+
+#### grunt release
+It will generate all the necessary files (both original & minified versions) in a separate dist/ folder

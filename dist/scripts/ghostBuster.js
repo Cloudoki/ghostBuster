@@ -22,12 +22,24 @@
 		results 			: false,
 		rss 				: "/rss",
 		onKeyUp 			: false,
-		result_template 	: "<a href='{{link}}'><p><h2>{{title}}</h2><h4>{{pubDate}}</h4></p></a>",
-		info_template		: "<p>Number of posts found: {{amount}}</p>",
+		info_template		: "<p id='num-results'>Number of posts found: {{amount}}</p>",
 		displaySearchInfo 	: true,
 		zeroResultsInfo		: true,
 		before 				: false,
-		onComplete 			: false
+		onComplete 			: false,
+		/*jshint multistr: true */
+		result_template		:  '<article class="post"> \
+								    <header class="post-header"> \
+								        <h2 class="post-title"><a href="{{link}}">{{title}}</a></h2> \
+								    </header> \
+								    <section class="post-excerpt"> \
+								        <p>{{description}}<a class="read-more" href="{{link}}">»</a></p> \
+								    </section> \
+								    <footer class="post-meta"> \
+								        <a href="#">{{author}}</a> \
+								        <time class="post-date" datetime="{{pubDate}}">{{pubDate}}</time> \
+								    </footer> \
+								</article>' 
 	};
 
 	var pluginMethods 	= {
@@ -54,6 +66,7 @@
 			this.index = lunr(function () {
 			    this.field('title', {boost: 10});
 			    this.field('description');
+			    this.field('author');
 			    this.field('link');
 			    this.field('category');
 			    this.field('pubDate');
@@ -121,7 +134,8 @@
 						description	: post.find('description').text(),
 						category 	: post.find('category').text(),
 						pubDate 	: post.find('pubDate').text(),
-						link 		: post.find('link').text()
+						link 		: post.find('link').text(),
+						author		: post.find('author').text()
 					};
 
 				    index.add(parsedData);
